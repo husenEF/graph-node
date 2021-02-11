@@ -49,6 +49,7 @@ const pg = {
     dialect: "postgres",
   },
   production: {
+    url:process.env.DB_PATH,
     use_env_variable: process.env.DB_PATH,
     dialect: process.env.DIALECT,
     operatorAliases: 0,
