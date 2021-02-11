@@ -65,5 +65,5 @@ const pg = {
 };
 
 const config = process.env.DIALECT === "mysql" ? { ...mysql } : { ...pg };
-console.log({ config, a: process.env.DIALECT });
+// console.log({ config, a: process.env.DIALECT });
 module.exports = config;
