@@ -9,6 +9,12 @@ const app = express();
 
 app.use(cors());
 
+app.get("/", (req, res) => {
+  res.json({
+    greeting: "Assalamu'alaikum",
+  });
+});
+
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,

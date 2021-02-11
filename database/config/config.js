@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-module.exports = {
+const mysql = {
   development: {
     username: process.env.USERNAME,
     password: process.env.PASSWORD,
@@ -25,3 +25,45 @@ module.exports = {
     operatorsAliases: false,
   },
 };
+
+const pg = {
+  development: {
+    use_env_variable: process.env.DB_PATH,
+    dialect: process.env.DIALECT,
+    operatorAliases: 0,
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
+    define: {
+      timestamps: 1,
+    },
+  },
+  test: {
+    username: "root",
+    password: null,
+    database: "database_test",
+    host: "127.0.0.1",
+    dialect: "postgres",
+  },
+  production: {
+    use_env_variable: process.env.DB_PATH,
+    dialect: process.env.DIALECT,
+    operatorAliases: 0,
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    },
+    define: {
+      timestamps: 1,
+    },
+  },
+};
+
+const config = process.env.DIALECT === "mysql" ? { ...mysql } : { ...pg };
+console.log({ config, a: process.env.DIALECT });
+module.exports = config;
