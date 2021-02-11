@@ -38,6 +38,7 @@ const pg = {
   production: {
     url: process.env.DATABASE_URL,
     dialect: "postgres",
+    host: process.env.PSQL_HOST || "localhost",
     dialectOptions: {
       ssl: {
         require: true,
