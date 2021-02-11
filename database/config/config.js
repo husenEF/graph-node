@@ -29,7 +29,7 @@ const mysql = {
 const pg = {
   development: {
     use_env_variable: process.env.DB_PATH,
-    dialect: process.env.DB_DIALECT,
+    dialect: process.env.DIALECT,
     operatorAliases: 0,
     dialectOptions: {
       ssl: {
@@ -50,7 +50,7 @@ const pg = {
   },
   production: {
     use_env_variable: process.env.DB_PATH,
-    dialect: process.env.DB_DIALECT,
+    dialect: process.env.DIALECT,
     operatorAliases: 0,
     dialectOptions: {
       ssl: {
@@ -64,4 +64,6 @@ const pg = {
   },
 };
 
-module.exports = process.env.DB_DIALECT === "mysql" ? mysql : pg;
+const config = process.env.DIALECT === "mysql" ? { ...mysql } : { ...pg };
+console.log({ config, a: process.env.DIALECT });
+module.exports = config;
