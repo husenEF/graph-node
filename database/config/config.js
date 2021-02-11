@@ -28,40 +28,16 @@ const mysql = {
 
 const pg = {
   development: {
-    use_env_variable: process.env.DB_PATH,
-    dialect: process.env.DIALECT,
-    operatorAliases: 0,
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false,
-      },
-    },
-    define: {
-      timestamps: 1,
-    },
+    url: process.env.DEV_DATABASE_URL,
+    dialect: "postgres",
   },
   test: {
-    username: "root",
-    password: null,
-    database: "database_test",
-    host: "127.0.0.1",
+    url: process.env.TEST_DATABASE_URL,
     dialect: "postgres",
   },
   production: {
-    url:process.env.DB_PATH,
-    use_env_variable: process.env.DB_PATH,
-    dialect: process.env.DIALECT,
-    operatorAliases: 0,
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false,
-      },
-    },
-    define: {
-      timestamps: 1,
-    },
+    url: process.env.DATABASE_URL,
+    dialect: "postgres",
   },
 };
 
