@@ -1,12 +1,13 @@
-const { Post } = require('../../database/models');
+const { Post } = require("../../database/models");
 
-const { AuthenticationError } = require('apollo-server-express');
+const { AuthenticationError } = require("apollo-server-express");
 
 module.exports = {
   Mutation: {
     async createPost(_, { content, title }, { user = null }) {
+      console.log({ user });
       if (!user) {
-        throw new AuthenticationError('You must login to create a post');
+        throw new AuthenticationError("You must login to create a post");
       }
       return Post.create({
         userId: user.id,

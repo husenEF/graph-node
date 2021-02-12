@@ -18,6 +18,7 @@ module.exports = {
         const token = jwt.sign({ id: user.id }, "mySecret");
         return { ...user.toJSON(), token };
       }
+      console.log({ user, s: bcrypt.compareSync(password, user.password) });
       throw new AuthenticationError("Invalid credentials");
     },
   },

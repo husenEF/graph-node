@@ -3,12 +3,19 @@ const jwt = require("jsonwebtoken");
 const { AuthenticationError } = require("apollo-server-express");
 
 const verifyToken = async (token) => {
+  console.log({ token });
   try {
     if (!token) return null;
-    const { id } = await jwt.verify(token, "mySecret");
+    const tokens = token.split(" ");
+
+    // console.log({ tokens });
+    const decoded = await jwt.verify(tokens[1], "mySecret");
+    // console.log({ decoded });
+    const { id } = decoded;
     const user = await User.findByPk(id);
     return user;
   } catch (error) {
+    // console.log({ error });
     throw new AuthenticationError(error.message);
   }
 };
